@@ -23,7 +23,8 @@
 
   // Parsed [r, g, b] for each field, or null while its text isn't a valid color.
   const state = { fg: null, bg: null };
-  let undoColor = null;
+  // Foregrounds replaced by tapping suggestions, oldest first.
+  let undoStack = [];
 
   /** What's wrong with the text, or '' if it's valid (or just not finished yet). */
   function errorFor(text, { finished }) {
@@ -54,7 +55,7 @@
   }
 
   function clearUndo() {
-    undoColor = null;
+    undoStack = [];
   }
 
   function renderVerdict(cell, passed, min) {
@@ -133,8 +134,12 @@
       els.list.replaceChildren(...items.map(renderSuggestion));
     }
 
-    els.undo.hidden = !undoColor;
-    if (undoColor) els.undoText.textContent = `Foreground changed from ${toHex(undoColor)}.`;
+    els.undo.hidden = undoStack.length === 0;
+    if (undoStack.length > 0) {
+      const previous = toHex(undoStack[undoStack.length - 1]);
+      const count = undoStack.length > 1 ? ` ${undoStack.length} changes to undo.` : '';
+      els.undoText.textContent = `Foreground changed from ${previous}.${count}`;
+    }
   }
 
   function render() {
@@ -165,7 +170,7 @@
   }
 
   function applySuggestion(color) {
-    undoColor = state.fg;
+    undoStack.push(state.fg);
     setColor('fg', color);
     render();
     // The tapped button no longer exists, so keep keyboard focus somewhere useful.
@@ -207,11 +212,15 @@
   });
 
   els.undoButton.addEventListener('click', () => {
-    const previous = undoColor;
-    clearUndo();
-    setColor('fg', previous);
+    setColor('fg', undoStack.pop());
     render();
-    fields.fg.text.focus({ preventScroll: true });
+    // Stay on the button while there's more to undo, so it can be pressed again.
+    // After that it's hidden, so move on, but not to a text field: on a phone that
+    // would open the keyboard.
+    if (undoStack.length === 0) {
+      const next = els.list.querySelector('button') || byId('suggestions-heading');
+      next.focus({ preventScroll: true });
+    }
   });
 
   // Live preview: the controls don't do anything real, so a status line shows that
