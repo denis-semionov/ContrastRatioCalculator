@@ -39,21 +39,6 @@
         <p>Enter two hex colors to get the contrast ratio and see what passes at AA and AAA. If a pair fails, tap the nearest foreground that fixes it.</p>
       </div>
 
-      <section class="card panel-preview" aria-labelledby="preview-heading">
-        <h2 id="preview-heading">Live preview</h2>
-        <div class="preview" id="preview">
-          <p class="preview-large">Large text sample</p>
-          <p class="preview-normal">Normal text sample. The quick brown fox jumps over the lazy dog.</p>
-          <div class="preview-ui" aria-hidden="true">
-            <span class="preview-button">Button</span>
-            <span class="preview-input"></span>
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>
-            </svg>
-          </div>
-        </div>
-      </section>
-
       <section class="card panel-colors" aria-labelledby="colors-heading">
         <h2 id="colors-heading">Colors</h2>
         <div class="fields">
@@ -126,6 +111,42 @@
         <div class="undo" id="undo" hidden>
           <p id="undo-text"></p>
           <button type="button" id="undo-button">Undo</button>
+        </div>
+      </section>
+
+      <section class="card panel-preview" aria-labelledby="preview-heading">
+        <div class="preview-header">
+          <h2 id="preview-heading">Live preview</h2>
+          <p>Try the controls</p>
+        </div>
+        <div class="preview" id="preview">
+          <p class="preview-large">Large text sample</p>
+          <p class="preview-normal">Normal text sample. The quick brown fox jumps over the lazy dog.</p>
+          <div class="preview-ui">
+            <button class="preview-button" id="preview-button" type="button">Button</button>
+            <div class="preview-select">
+              <select id="preview-select" aria-label="Sample dropdown menu">
+                <option value="">Choose an option</option>
+                <option>Option one</option>
+                <option>Option two</option>
+                <option>Option three</option>
+              </select>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </div>
+            <form class="preview-search" id="preview-search" role="search" aria-label="Sample search">
+              <input class="preview-input" id="preview-input" type="text" placeholder="Type here" maxlength="40"
+                     autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                     enterkeyhint="search" aria-label="Sample text field">
+              <button class="preview-icon-button" type="submit" aria-label="Sample search button">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>
+                </svg>
+              </button>
+            </form>
+          </div>
+          <p class="preview-status" id="preview-status" role="status">Nothing selected yet.</p>
         </div>
       </section>
     </div>

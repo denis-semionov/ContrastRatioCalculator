@@ -11,6 +11,7 @@ It's free, needs no sign-up, and works on desktop and mobile. Everything runs in
 1. Enter your text or icon color as the **Foreground**, and the color behind it as the **Background**. You can type a hex code or use the color picker.
 2. Read the contrast ratio and see which levels pass or fail.
 3. If something fails, tap a suggested color to use it as the new foreground. Changed your mind? Tap **Undo**.
+4. Try the button, text field and dropdown in the **Live preview** to see how your colors work on real controls.
 
 Hex codes can have 3 or 6 digits, with or without the `#`, so `#1A2B3C`, `1a2b3c` and `#FFF` all work.
 

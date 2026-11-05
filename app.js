@@ -214,6 +214,28 @@
     fields.fg.text.focus({ preventScroll: true });
   });
 
+  // Live preview: the controls don't do anything real, so a status line shows that
+  // they responded.
+  const previewStatus = byId('preview-status');
+  const previewInput = byId('preview-input');
+  const previewSelect = byId('preview-select');
+
+  byId('preview-button').addEventListener('click', () => {
+    previewStatus.textContent = 'Button pressed.';
+  });
+
+  previewSelect.addEventListener('change', () => {
+    previewStatus.textContent = previewSelect.value
+      ? `Selected: ${previewSelect.value}.`
+      : 'Nothing selected yet.';
+  });
+
+  byId('preview-search').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const query = previewInput.value.trim();
+    previewStatus.textContent = query ? `Searched for: ${query}` : 'Type something to search.';
+  });
+
   setColor('fg', parseHex(fields.fg.text.value));
   setColor('bg', parseHex(fields.bg.text.value));
   render();

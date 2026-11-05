@@ -47,9 +47,9 @@ body {
 
 h1, h2, h3, p { margin: 0; }
 
-button, input { font: inherit; color: inherit; }
+button, input, select { font: inherit; color: inherit; }
 
-button { touch-action: manipulation; cursor: pointer; }
+button, select { touch-action: manipulation; cursor: pointer; }
 
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
@@ -389,6 +389,8 @@ a { color: inherit; }
 
 .preview {
   display: grid;
+  /* minmax(0, 1fr) stops the inputs' default width from widening the panel. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.75rem;
   margin-top: 0.875rem;
   padding: 1.25rem;
@@ -397,28 +399,119 @@ a { color: inherit; }
   border: 1px solid var(--line);
   border-radius: 0.5rem;
   overflow-wrap: anywhere;
+  /* The controls have their own pressed states; the blue flash isn't a tested color. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .preview-large { font-size: 1.5rem; line-height: 1.25; }
 
+.preview-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 0.75rem;
+}
+
+.preview-header p { color: var(--muted); font-size: 0.875rem; }
+
+/* Everything wraps, and the select and search row grow to fill each line. */
 .preview-ui { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
 
+/* 2.75rem meets the 44px touch target. 1rem text stops iOS zooming in on focus. */
+.preview-button,
+.preview-select select,
+.preview-input,
+.preview-icon-button {
+  height: 2.75rem;
+  border: 2px solid var(--preview-fg);
+  border-radius: 0.375rem;
+  font-size: 1rem;
+}
+
 .preview-button {
-  padding: 0.375rem 0.875rem;
+  flex: none;
+  padding: 0 1rem;
   background: var(--preview-fg);
   color: var(--preview-bg);
-  border-radius: 0.375rem;
   font-weight: 600;
 }
 
-.preview-input {
-  width: 6rem;
-  height: 2.25rem;
-  border: 2px solid var(--preview-fg);
-  border-radius: 0.375rem;
+.preview-select { position: relative; flex: 1 1 11rem; min-width: 0; }
+
+.preview-select select {
+  appearance: none;
+  width: 100%;
+  padding: 0 2.5rem 0 0.75rem;
+  background: transparent;
+  color: var(--preview-fg);
+  text-overflow: ellipsis;
 }
 
-.preview-ui svg { flex: none; }
+/* The desktop popup. Phones use their own picker, in system colors. */
+.preview-select option { background: var(--preview-bg); color: var(--preview-fg); }
+
+.preview-select svg {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.preview-search { display: flex; flex: 1 1 13rem; gap: 0.5rem; min-width: 0; }
+
+.preview-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 0.75rem;
+  background: transparent;
+  color: var(--preview-fg);
+  caret-color: var(--preview-fg);
+}
+
+/* Browsers dim placeholders by default, which would misstate the tested contrast. */
+.preview-input::placeholder { color: var(--preview-fg); opacity: 1; }
+
+.preview-input::selection { background: var(--preview-fg); color: var(--preview-bg); }
+
+.preview-icon-button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  padding: 0;
+  background: transparent;
+  border-color: transparent;
+  color: var(--preview-fg);
+}
+
+.preview-button:active { background: var(--preview-bg); color: var(--preview-fg); }
+
+.preview-icon-button:active {
+  background: var(--preview-fg);
+  border-color: var(--preview-fg);
+  color: var(--preview-bg);
+}
+
+/* Only on devices that can really hover, since a tap would leave this stuck on. */
+@media (hover: hover) {
+  .preview-button:hover { background: var(--preview-bg); color: var(--preview-fg); }
+
+  .preview-icon-button:hover { border-color: var(--preview-fg); }
+
+  .preview-select select:hover,
+  .preview-input:hover { box-shadow: inset 0 0 0 1px var(--preview-fg); }
+}
+
+/* Black and white together, so focus stays visible even when the tested pair isn't. */
+.preview :focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px #000000;
+}
+
+.preview-status { min-height: 1.5em; font-size: 0.875rem; }
 
 @media (forced-colors: active) {
   .verdict, .suggestion-swatch { border: 1px solid; }
