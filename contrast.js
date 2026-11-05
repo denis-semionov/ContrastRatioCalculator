@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * WCAG 2.x contrast maths and nearest-passing-color search. No DOM access, so
+ * WCAG 2.x contrast maths and nearest-passing-colour search. No DOM access, so
  * it runs in the browser (as a classic script) and in Node (for the tests).
- * Colors are [r, g, b] arrays of integers from 0 to 255.
+ * Colours are [r, g, b] arrays of integers from 0 to 255.
  */
 const Contrast = (() => {
   // Thresholds that have to be met for each kind of content.
@@ -15,7 +15,7 @@ const Contrast = (() => {
     { id: 'aa-ui', level: 'AA', content: 'ui', min: 3 },
   ];
 
-  // Each distinct threshold, and what a color meeting it passes in total.
+  // Each distinct threshold, and what a colour meeting it passes in total.
   const TIERS = [
     { min: 3, label: 'AA large text and UI components' },
     { min: 4.5, label: 'All AA, plus AAA large text' },
@@ -65,7 +65,7 @@ const Contrast = (() => {
     return (Math.floor(value * 100 + 1e-9) / 100).toFixed(2);
   }
 
-  /** The strongest contrast any color can reach on this background. */
+  /** The strongest contrast any colour can reach on this background. */
   function bestPossible(bg) {
     const onBlack = ratio(BLACK, bg);
     const onWhite = ratio(WHITE, bg);
@@ -74,7 +74,7 @@ const Contrast = (() => {
       : { color: WHITE, ratio: onWhite };
   }
 
-  // OKLab: distances in it track how different two colors look, which RGB
+  // OKLab: distances in it track how different two colours look, which RGB
   // distances do not.
   function oklab([r, g, b]) {
     const lr = LINEAR[r];
@@ -91,7 +91,7 @@ const Contrast = (() => {
   }
 
   // Fixing contrast has to change lightness, so a shift in hue or saturation is
-  // the less expected change and costs more. Unweighted, grays pick up a tint.
+  // the less expected change and costs more. Unweighted, greys pick up a tint.
   const CHROMA_WEIGHT = 9;
 
   function distanceSquared(a, b) {
@@ -99,11 +99,11 @@ const Contrast = (() => {
   }
 
   /**
-   * The color perceptually closest to `fg` that reaches `min` against `bg`, or
-   * null if nothing can. Returns `fg` itself if it already passes.
+   * The colour perceptually closest to fg that reaches min against bg, or
+   * null if nothing can. Returns fg itself if it already passes.
    *
-   * Checking all 16.7M colors is too slow to run per keystroke, so this scans a
-   * coarse grid and then refines around the best hit. Colors lighter and darker
+   * Checking all 16.7M colours is too slow to run per keystroke, so this scans a
+   * coarse grid and then refines around the best hit. Colours lighter and darker
    * than the background are refined separately, because the closest answer can
    * be on either side and they form two disconnected regions.
    */
@@ -132,7 +132,7 @@ const Contrast = (() => {
     const pickCloser = () => (lighter.distance < darker.distance ? lighter.color : darker.color);
 
     // A neutral foreground stays neutral: a faint tint could land slightly closer
-    // to the threshold, but nobody wants #797676 when they started from a gray.
+    // to the threshold, but nobody wants #797676 when they started from a grey.
     if (fg[0] === fg[1] && fg[1] === fg[2]) {
       for (let v = 0; v <= 255; v += 1) consider(v, v, v);
       return pickCloser();
@@ -160,7 +160,7 @@ const Contrast = (() => {
     for (const side of [lighter, darker]) {
       if (!side.color) continue;
       scanAround(side, 8, 1);
-      // Keep walking along the threshold until no neighbor is any closer.
+      // Keep walking along the threshold until no neighbour is any closer.
       let previous;
       do {
         previous = side.distance;
@@ -173,7 +173,7 @@ const Contrast = (() => {
 
   /**
    * One entry per threshold the pair fails, lowest first. Each has either a
-   * `color` to switch to, or `color: null` plus `best` when the background makes
+   * color to switch to, or color: null plus best when the background makes
    * the threshold unreachable for every possible foreground.
    */
   function suggestions(fg, bg) {

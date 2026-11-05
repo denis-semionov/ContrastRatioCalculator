@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contrast Ratio Calculator: WCAG AA and AAA checker</title>
-  <meta name="description" content="Check the WCAG contrast ratio of two hex colors for AA, AAA and UI components, and get the nearest foreground that passes.">
+  <meta name="description" content="Check the WCAG contrast ratio of two hex colours for AA, AAA and UI components, and get the nearest foreground that passes.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23fff' stroke='%23111' stroke-width='3'/%3E%3Cpath d='M16 2a14 14 0 0 1 0 28z' fill='%23111'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
@@ -35,17 +35,17 @@
   <main>
     <div class="wrap stage" id="calculator">
       <div class="intro">
-        <h1>Check color contrast against WCAG</h1>
-        <p>Enter two hex colors to get the contrast ratio and see what passes at AA and AAA. If a pair fails, tap the nearest foreground that fixes it.</p>
+        <h1>Check colour contrast against WCAG</h1>
+        <p>Enter two hex colours to get the contrast ratio and see what passes at AA and AAA. If a pair fails, tap the nearest foreground that fixes it.</p>
       </div>
 
       <section class="card panel-colors" aria-labelledby="colors-heading">
-        <h2 id="colors-heading">Colors</h2>
+        <h2 id="colors-heading">Colours</h2>
         <div class="fields">
           <div class="field" data-field="fg">
             <label for="fg-hex">Foreground</label>
             <div class="color-control">
-              <input class="picker" id="fg-picker" type="color" aria-label="Foreground color picker">
+              <input class="picker" id="fg-picker" type="color" aria-label="Foreground colour picker">
               <input class="hex" id="fg-hex" type="text" value="#E8590C" maxlength="16"
                      autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
                      aria-describedby="fg-error">
@@ -60,7 +60,7 @@
           <div class="field" data-field="bg">
             <label for="bg-hex">Background</label>
             <div class="color-control">
-              <input class="picker" id="bg-picker" type="color" aria-label="Background color picker">
+              <input class="picker" id="bg-picker" type="color" aria-label="Background colour picker">
               <input class="hex" id="bg-hex" type="text" value="#FFFFFF" maxlength="16"
                      autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
                      aria-describedby="bg-error">
@@ -193,14 +193,14 @@
         <div class="method-grid">
           <div>
             <h3>The contrast ratio</h3>
-            <p>WCAG compares the relative luminance of the lighter color (L1) and the darker color (L2):</p>
+            <p>WCAG compares the relative luminance of the lighter colour (L1) and the darker colour (L2):</p>
             <p class="formula"><code>(L1 + 0.05) / (L2 + 0.05)</code></p>
-            <p>Results run from 1:1 for identical colors to 21:1 for black on white. They're cut off at two decimals, never rounded up, so a failing 4.499 can't read as 4.50. Pass or fail always uses the exact value.</p>
+            <p>Results run from 1:1 for identical colours to 21:1 for black on white. They're cut off at two decimals, never rounded up, so a failing 4.499 can't read as 4.50. Pass or fail always uses the exact value.</p>
           </div>
           <div>
             <h3>The suggestions</h3>
-            <p>For each threshold a pair misses, the calculator looks for the passing color closest in appearance to your foreground, using the OKLab color space. Hue and saturation shifts count for more than lightness shifts, and a gray always stays a pure gray.</p>
-            <p>On mid-tone backgrounds no color can reach 7:1. When that happens, the calculator says so and names the strongest color available.</p>
+            <p>For each threshold a pair misses, the calculator looks for the passing colour closest in appearance to your foreground, using the OKLab colour space. Hue and saturation shifts count for more than lightness shifts, and a grey always stays a pure grey.</p>
+            <p>On mid-tone backgrounds no colour can reach 7:1. When that happens, the calculator says so and names the strongest colour available.</p>
           </div>
         </div>
       </div>
@@ -209,7 +209,7 @@
 
   <footer class="site-footer">
     <div class="wrap site-footer-inner">
-      <p>Contrast Ratio Calculator. Runs in your browser, so your colors aren't sent anywhere.</p>
+      <p>Contrast Ratio Calculator. Runs in your browser, so your colours aren't sent anywhere.</p>
       <ul class="footer-links">
         <li><a href="https://www.w3.org/TR/WCAG22/#dfn-contrast-ratio">WCAG 2.2 definition</a></li>
         <li><a href="https://github.com/denis-semionov/ContrastRatioCalculator">Source on GitHub</a></li>

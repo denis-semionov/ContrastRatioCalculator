@@ -186,7 +186,7 @@ a { color: inherit; }
   }
 }
 
-/* Color inputs */
+/* Colour inputs */
 
 /* minmax(0, 1fr) lets the column shrink below the inputs' default width. */
 .fields { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.75rem; margin-top: 0.875rem; }
@@ -388,7 +388,7 @@ a { color: inherit; }
   font-weight: 600;
 }
 
-/* Preview: painted only with the two colors being tested. */
+/* Preview: painted only with the two colours being tested. */
 
 .preview {
   display: grid;
@@ -402,7 +402,7 @@ a { color: inherit; }
   border: 1px solid var(--line);
   border-radius: 0.5rem;
   overflow-wrap: anywhere;
-  /* The controls have their own pressed states; the blue flash isn't a tested color. */
+  /* The controls have their own pressed states; the blue flash isn't a tested colour. */
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -451,7 +451,7 @@ a { color: inherit; }
   text-overflow: ellipsis;
 }
 
-/* The desktop popup. Phones use their own picker, in system colors. */
+/* The desktop popup. Phones use their own picker, in system colours. */
 .preview-select option { background: var(--preview-bg); color: var(--preview-fg); }
 
 .preview-select svg {
@@ -642,7 +642,7 @@ a { color: inherit; }
   .method-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* Footer: dark in both color schemes, so it sets its own text and focus colors. */
+/* Footer: dark in both colour schemes, so it sets its own text and focus colours. */
 
 .site-footer {
   --focus: #8fb0ff;

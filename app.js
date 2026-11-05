@@ -21,7 +21,7 @@
     undoButton: byId('undo-button'),
   };
 
-  // Parsed [r, g, b] for each field, or null while its text isn't a valid color.
+  // Parsed [r, g, b] for each field, or null while its text isn't a valid colour.
   const state = { fg: null, bg: null };
   // Foregrounds replaced by tapping suggestions, oldest first.
   let undoStack = [];
@@ -36,7 +36,7 @@
     }
     if (digits.length > 6) return 'Too many digits. Use 3 or 6.';
     if (!finished || parseHex(value)) return '';
-    return value ? 'Use 3 or 6 digits, like #1A2B3C.' : 'Enter a hex color, like #1A2B3C.';
+    return value ? 'Use 3 or 6 digits, like #1A2B3C.' : 'Enter a hex colour, like #1A2B3C.';
   }
 
   function showError(name, message) {
@@ -78,7 +78,7 @@
 
     if (!item.color) {
       li.className = 'suggestion-none';
-      li.textContent = `${item.min}:1 can’t be reached on this background. The most any color gets is ${formatRatio(item.best.ratio)}:1, with ${toHex(item.best.color)}.`;
+      li.textContent = `${item.min}:1 can’t be reached on this background. The most any colour gets is ${formatRatio(item.best.ratio)}:1, with ${toHex(item.best.color)}.`;
       return li;
     }
 
@@ -124,7 +124,7 @@
   function renderSuggestions() {
     const { fg, bg } = state;
     if (!fg || !bg) {
-      els.intro.textContent = 'Enter two valid hex colors to see suggestions.';
+      els.intro.textContent = 'Enter two valid hex colours to see suggestions.';
       els.list.replaceChildren();
     } else {
       const items = suggestions(fg, bg);

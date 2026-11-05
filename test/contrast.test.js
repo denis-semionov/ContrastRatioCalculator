@@ -55,7 +55,7 @@ test('formatRatio truncates so a failing value never reads as passing', () => {
   assert.equal(formatRatio(ratio(c('#fff'), c('#fff'))), '1.00');
 });
 
-test('nearestPassing returns a color that really passes', () => {
+test('nearestPassing returns a colour that really passes', () => {
   const pairs = [
     ['#E8590C', '#FFFFFF'],
     ['#FFFF00', '#FFFFFF'],
@@ -83,7 +83,7 @@ test('nearestPassing lands right at the threshold, not far past it', () => {
   assert.ok(ratio(found, c('#FFFFFF')) < 4.6, toHex(found));
 });
 
-test('nearestPassing keeps a gray foreground gray', () => {
+test('nearestPassing keeps a grey foreground grey', () => {
   assert.equal(toHex(nearestPassing(c('#999999'), c('#FFFFFF'), 4.5)), '#767676');
   assert.equal(toHex(nearestPassing(c('#CCCCCC'), c('#FFFFFF'), 7)), '#595959');
 });
@@ -107,8 +107,8 @@ test('every suggestion passes its threshold', () => {
   for (const s of list) assert.ok(s.ratio >= s.min);
 });
 
-test('an unreachable threshold reports the best achievable color instead', () => {
-  // Mid gray: neither black nor white reaches 7:1.
+test('an unreachable threshold reports the best achievable colour instead', () => {
+  // Mid grey: neither black nor white reaches 7:1.
   const [unreachable] = suggestions(c('#777777'), c('#777777')).filter((s) => s.min === 7);
   assert.equal(unreachable.color, null);
   assert.ok(unreachable.best.ratio < 7);
@@ -117,6 +117,6 @@ test('an unreachable threshold reports the best achievable color instead', () =>
 
 test('4.5:1 is reachable on every background', () => {
   for (let v = 0; v <= 255; v += 1) {
-    assert.ok(bestPossible([v, v, v]).ratio >= 4.5, `gray ${v}`);
+    assert.ok(bestPossible([v, v, v]).ratio >= 4.5, `grey ${v}`);
   }
 });

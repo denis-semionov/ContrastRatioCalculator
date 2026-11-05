@@ -1,23 +1,23 @@
 # Contrast Ratio Calculator
 
-Find out whether two colors have enough contrast to meet WCAG accessibility guidelines. If they don't, get the closest color that does.
+Find out whether two colours have enough contrast to meet WCAG accessibility guidelines. If they don't, get the closest colour that does.
 
 **[Open the calculator](https://denis-semionov.github.io/ContrastRatioCalculator/)**
 
-It's free, needs no sign-up, and works on desktop and mobile. Everything runs in your browser, so your colors aren't sent anywhere.
+It's free, needs no sign-up, and works on desktop and mobile. Everything runs in your browser, so your colours aren't sent anywhere.
 
 ## How to use it
 
-1. Enter your text or icon color as the **Foreground**, and the color behind it as the **Background**. You can type a hex code or use the color picker.
+1. Enter your text or icon colour as the **Foreground**, and the colour behind it as the **Background**. You can type a hex code or use the colour picker.
 2. Read the contrast ratio and see which levels pass or fail.
-3. If something fails, tap a suggested color to use it as the new foreground. Changed your mind? Tap **Undo**.
-4. Try the button, text field and dropdown in the **Live preview** to see how your colors work on real controls.
+3. If something fails, tap a suggested colour to use it as the new foreground. Changed your mind? Tap **Undo**.
+4. Try the button, text field and dropdown in the **Live preview** to see how your colours work on real controls.
 
 Hex codes can have 3 or 6 digits, with or without the `#`, so `#1A2B3C`, `1a2b3c` and `#FFF` all work.
 
 ## What the results mean
 
-A higher ratio means more contrast. Ratios run from 1:1 (identical colors) to 21:1 (black on white).
+A higher ratio means more contrast. Ratios run from 1:1 (identical colours) to 21:1 (black on white).
 
 | What you're checking | AA | AAA |
 | --- | --- | --- |
@@ -29,20 +29,20 @@ A higher ratio means more contrast. Ratios run from 1:1 (identical colors) to 21
 
 ## Common questions
 
-**Why does it say a color can't be reached?**
-On mid-tone backgrounds, no color can reach 7:1, not even black or white. The calculator tells you the strongest contrast available and which color gives it. To reach 7:1, you'd need to change the background.
+**Why does it say a colour can't be reached?**
+On mid-tone backgrounds, no colour can reach 7:1, not even black or white. The calculator tells you the strongest contrast available and which colour gives it. To reach 7:1, you'd need to change the background.
 
 **Why are there several suggestions?**
-You get one for each threshold your colors miss (3:1, 4.5:1 and 7:1). The higher the target, the further the color may move from your original.
+You get one for each threshold your colours miss (3:1, 4.5:1 and 7:1). The higher the target, the further the colour may move from your original.
 
-**How does it choose the nearest color?**
-It looks for the passing color that looks most like your foreground, trying to keep the same hue and saturation. Grays stay pure gray. It uses a fast search rather than checking all 16.7 million colors, so a suggestion can occasionally differ very slightly from the mathematically closest one.
+**How does it choose the nearest colour?**
+It looks for the passing colour that looks most like your foreground, trying to keep the same hue and saturation. Greys stay pure grey. It uses a fast search rather than checking all 16.7 million colours, so a suggestion can occasionally differ very slightly from the mathematically closest one.
 
 **Why does my ratio differ slightly from another tool?**
 This calculator cuts ratios off at two decimals instead of rounding them, so a failing 4.499 shows as 4.49 rather than a misleading 4.50. Pass or fail always uses the exact value.
 
-**Can I check transparent colors?**
-No. The contrast of a see-through color depends on what's behind it, so 4-digit and 8-digit hex codes aren't accepted.
+**Can I check transparent colours?**
+No. The contrast of a see-through colour depends on what's behind it, so 4-digit and 8-digit hex codes aren't accepted.
 
 ## For developers
 
@@ -60,7 +60,7 @@ node --test
 
 | File | What it does |
 | --- | --- |
-| `contrast.js` | WCAG calculations and the nearest-color search |
+| `contrast.js` | WCAG calculations and the nearest-colour search |
 | `app.js` | Connects the calculations to the page |
 | `index.html`, `styles.css` | The page and its styling |
 | `test/contrast.test.js` | Tests for `contrast.js` |
