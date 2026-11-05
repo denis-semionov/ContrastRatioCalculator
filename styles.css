@@ -158,15 +158,18 @@ a { color: inherit; }
   .stage {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
-      "intro preview"
+      "intro intro"
+      "preview preview"
       "colors result"
       "suggestions result";
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto auto 1fr;
     column-gap: 1.25rem;
     row-gap: 1.25rem;
   }
 
   .intro { grid-area: intro; align-self: center; padding-right: 1.5rem; }
+
+  .intro p { max-width: 42rem; }
   .panel-preview { grid-area: preview; order: 0; }
   .panel-colors { grid-area: colors; order: 0; }
   .panel-result { grid-area: result; order: 0; }
@@ -520,9 +523,52 @@ a { color: inherit; }
 @media (min-width: 52rem) {
   .panel-preview { display: flex; flex-direction: column; }
 
-  .preview { flex: 1; align-content: center; padding: 1.5rem 2rem; }
+  /* Text samples on the left, a compact block of controls on the right. */
+  .preview {
+    flex: 1;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 21rem);
+    grid-template-rows: auto auto 1fr;
+    gap: 0.5rem 2.5rem;
+    padding: 1.5rem 2rem;
+  }
 
-  .preview-large { font-size: 2rem; }
+  .preview-large {
+    grid-column: 1;
+    font-size: 2.25rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .preview-normal { grid-column: 1; }
+
+  .preview-status { grid-column: 1; align-self: end; margin-top: 0.25rem; }
+
+  .preview-ui { grid-column: 2; grid-row: 1 / -1; align-self: center; }
+
+  /* The field and its button read as one joined control. */
+  .preview-search { flex-basis: 100%; gap: 0; }
+
+  .preview-input { border-right-width: 0; border-radius: 0.375rem 0 0 0.375rem; }
+
+  .preview-icon-button {
+    background: var(--preview-fg);
+    border-color: var(--preview-fg);
+    border-radius: 0 0.375rem 0.375rem 0;
+    color: var(--preview-bg);
+  }
+
+  .preview-icon-button:hover,
+  .preview-icon-button:active {
+    background: var(--preview-bg);
+    color: var(--preview-fg);
+  }
+
+  /* Clicking a text field always shows focus, so the ring needs to be slimmer here. */
+  .preview :focus-visible {
+    position: relative;
+    outline-offset: 1px;
+    box-shadow: 0 0 0 4px #000000;
+  }
 }
 
 /* Reference sections */
