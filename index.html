@@ -10,15 +10,50 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="masthead">
-    <h1>Contrast Ratio Calculator</h1>
-    <p>Check two hex colors against WCAG 2.2 contrast requirements.</p>
+  <a class="skip-link" href="#calculator">Skip to calculator</a>
+
+  <header class="site-header">
+    <div class="wrap site-header-inner">
+      <a class="brand" href="./">
+        <svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+          <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="3"/>
+          <path d="M16 2a14 14 0 0 1 0 28z" fill="currentColor"/>
+        </svg>
+        Contrast Ratio Calculator
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#calculator">Calculator</a>
+        <a href="#levels">WCAG levels</a>
+        <a href="#method">How it works</a>
+        <a href="https://github.com/denis-semionov/ContrastRatioCalculator">GitHub</a>
+      </nav>
+    </div>
   </header>
 
-  <noscript><p class="noscript">This calculator needs JavaScript to work.</p></noscript>
+  <noscript><p class="wrap noscript">This calculator needs JavaScript to work.</p></noscript>
 
-  <main class="layout">
-    <div class="column">
+  <main>
+    <div class="wrap stage" id="calculator">
+      <div class="intro">
+        <h1>Check color contrast against WCAG</h1>
+        <p>Enter two hex colors to get the contrast ratio and see what passes at AA and AAA. If a pair fails, tap the nearest foreground that fixes it.</p>
+      </div>
+
+      <section class="card panel-preview" aria-labelledby="preview-heading">
+        <h2 id="preview-heading">Live preview</h2>
+        <div class="preview" id="preview">
+          <p class="preview-large">Large text sample</p>
+          <p class="preview-normal">Normal text sample. The quick brown fox jumps over the lazy dog.</p>
+          <div class="preview-ui" aria-hidden="true">
+            <span class="preview-button">Button</span>
+            <span class="preview-input"></span>
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
       <section class="card panel-colors" aria-labelledby="colors-heading">
         <h2 id="colors-heading">Colors</h2>
         <div class="fields">
@@ -50,23 +85,6 @@
         </div>
       </section>
 
-      <section class="card panel-preview" aria-labelledby="preview-heading">
-        <h2 id="preview-heading">Preview</h2>
-        <div class="preview" id="preview">
-          <p class="preview-large">Large text sample</p>
-          <p class="preview-normal">Normal text sample. The quick brown fox jumps over the lazy dog.</p>
-          <div class="preview-ui" aria-hidden="true">
-            <span class="preview-button">Button</span>
-            <span class="preview-input"></span>
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>
-            </svg>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <div class="column">
       <section class="card panel-result" aria-labelledby="result-heading">
         <h2 id="result-heading">Contrast ratio</h2>
         <p class="ratio"><output id="ratio">–</output></p>
@@ -111,10 +129,71 @@
         </div>
       </section>
     </div>
+
+    <section class="band" id="levels" aria-labelledby="levels-heading">
+      <div class="wrap">
+        <h2 class="band-heading" id="levels-heading">What the WCAG levels require</h2>
+        <p class="band-lede">AA is the level most accessibility standards and policies ask for. AAA is a stricter target that isn't achievable for all content.</p>
+        <div class="level-grid">
+          <article class="level">
+            <h3>Normal text</h3>
+            <p>Any text smaller than the large text sizes, which usually means body copy, labels and captions.</p>
+            <dl class="level-minimums">
+              <div><dt>AA</dt><dd>4.5:1</dd></div>
+              <div><dt>AAA</dt><dd>7:1</dd></div>
+            </dl>
+            <p class="level-source">WCAG <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">1.4.3</a> and <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html">1.4.6</a></p>
+          </article>
+          <article class="level">
+            <h3>Large text</h3>
+            <p>Text of at least 24px, or at least 18.66px when bold. Larger letters stay readable at lower contrast.</p>
+            <dl class="level-minimums">
+              <div><dt>AA</dt><dd>3:1</dd></div>
+              <div><dt>AAA</dt><dd>4.5:1</dd></div>
+            </dl>
+            <p class="level-source">WCAG <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">1.4.3</a> and <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html">1.4.6</a></p>
+          </article>
+          <article class="level">
+            <h3>UI components</h3>
+            <p>Icons, input borders, focus indicators and other graphics that people need to see to understand or use the page.</p>
+            <dl class="level-minimums">
+              <div><dt>AA</dt><dd>3:1</dd></div>
+              <div><dt>AAA</dt><dd class="level-undefined">Not defined</dd></div>
+            </dl>
+            <p class="level-source">WCAG <a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html">1.4.11</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-plain" id="method" aria-labelledby="method-heading">
+      <div class="wrap">
+        <h2 class="band-heading" id="method-heading">How it works</h2>
+        <div class="method-grid">
+          <div>
+            <h3>The contrast ratio</h3>
+            <p>WCAG compares the relative luminance of the lighter color (L1) and the darker color (L2):</p>
+            <p class="formula"><code>(L1 + 0.05) / (L2 + 0.05)</code></p>
+            <p>Results run from 1:1 for identical colors to 21:1 for black on white. They're cut off at two decimals, never rounded up, so a failing 4.499 can't read as 4.50. Pass or fail always uses the exact value.</p>
+          </div>
+          <div>
+            <h3>The suggestions</h3>
+            <p>For each threshold a pair misses, the calculator looks for the passing color closest in appearance to your foreground, using the OKLab color space. Hue and saturation shifts count for more than lightness shifts, and a gray always stays a pure gray.</p>
+            <p>On mid-tone backgrounds no color can reach 7:1. When that happens, the calculator says so and names the strongest color available.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="colophon">
-    <p>Ratios are cut off at two decimals, never rounded up, so a failing 4.499 can't read as 4.50. Formula from <a href="https://www.w3.org/TR/WCAG22/#dfn-contrast-ratio">WCAG 2.2</a>. <a href="https://github.com/denis-semionov/ContrastRatioCalculator">Source on GitHub</a>.</p>
+  <footer class="site-footer">
+    <div class="wrap site-footer-inner">
+      <p>Contrast Ratio Calculator. Runs in your browser, so your colors aren't sent anywhere.</p>
+      <ul class="footer-links">
+        <li><a href="https://www.w3.org/TR/WCAG22/#dfn-contrast-ratio">WCAG 2.2 definition</a></li>
+        <li><a href="https://github.com/denis-semionov/ContrastRatioCalculator">Source on GitHub</a></li>
+      </ul>
+    </div>
   </footer>
 
   <script src="contrast.js"></script>
